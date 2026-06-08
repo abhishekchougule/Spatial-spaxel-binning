@@ -109,7 +109,7 @@ observed_FWHM = [2.943685832664074, 4.893285634910402, 5.335917188248487, 3.1565
 * `binning_functions.py` - Calculates galactocentric coordinates, bin positions and S/N. 
 * `spectrum_functions.py` - Extract and fit central and global spectra to get required line info. Extract spectra based on window sizes.
 * `bin_plots.py` - Visualization tools to map and evaluate the final bin configurations.
-* `MHDFS-0003-cube.fits` - Example data cube file provided to test the pipeline out of the box.
+* `MHDFS-0003-cube.tar.gz` - Example data cube file provided to test the pipeline (see `execute_binning.ipynb`).
 
 ---
 
