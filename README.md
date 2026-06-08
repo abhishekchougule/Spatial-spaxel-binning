@@ -6,7 +6,7 @@ This implementation is based on the algorithm outlined by Carton et al. (2017), 
 
 If you use this code in your research, please cite our paper:
 > Chougule et al. (2026), Astronomy & Astrophysics (in prep).
-> Zenodo DOI: https://doi.org/10.5281/zenodo.XXXXXXX
+> Zenodo DOI: https://doi.org/10.5281/zenodo.20594998
 
 ---
 
@@ -148,6 +148,6 @@ If you use this code, please cite the Zenodo archive DOI associated with this re
           title = "{Dependency of the mass--central metallicity relation on metallicity gradients in galaxies with MUSE}",
         journal = {A&A},
            year = 2026,
-           note = {Code available via Zenodo: [https://doi.org/10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)}
+           note = {Code available via Zenodo: [https://doi.org/10.5281/zenodo.20594998](https://doi.org/10.5281/zenodo.20594998)}
   }
 ```
