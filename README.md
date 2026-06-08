@@ -145,7 +145,7 @@ If you use this code, please cite the Zenodo archive DOI associated with this re
 ```Code snippet
   @ARTICLE{Chougule2026,
          author = {{Chougule}, Abhishek and et al.},
-          title = "{Your Paper Title Here}",
+          title = "{Dependency of the mass--central metallicity relation on metallicity gradients in galaxies with MUSE}",
         journal = {A&A},
            year = 2026,
            note = {Code available via Zenodo: [https://doi.org/10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)}
