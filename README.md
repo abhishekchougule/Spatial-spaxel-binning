@@ -57,11 +57,13 @@ Regardless of the mode chosen, the actual spatial binning process is identical: 
 The only difference between the two modes lies in how the target line wavelengths and window sizes are determined:
 
 * **Mode A: Full Profile Initialization (Requires pyplatefit)**
-  The pipeline automatically extracts the central spectrum of the galaxy and fits it using `pyplatefit`. It dynamically identifies the two Balmer lines and two forbidden lines with the highest S/N, and extracts their precise observed wavelengths and FWHM values to define the spectral windows automatically.
+  The pipeline automatically extracts the central spectrum and globally integrated spectrum of the galaxy and fits them using `pyplatefit`. It dynamically identifies the two Balmer lines and two forbidden lines with the highest S/N from the globally integrated spectrum, and extracts their precise observed wavelengths and FWHM values to define the spectral windows automatically using the central spectrum.
   
 * **Mode B: Fast Window Fallback (No pyplatefit required)**
-  The pipeline prints a warning and skips the automated central spectrum profile fitting. Instead, the user must manually provide the emission line list, their respective observed wavelengths, and FWHM. To extract the central spectrum from an MPDAF data cube, you can do it as follows:
+  The pipeline prints a warning and skips the automated central and globally integrated spectrum profile fitting. Instead, the user must manually provide the emission line list, their respective observed wavelengths, and FWHM. To extract the globally integrated and central spectrum from an MPDAF data cube, you can do it as follows:
 ```python
+# Get globally integrated spectrum
+global_spectrum = cube.sum(axis=(1,2))
 # Get the x,y coordinate of the central spaxel
 y_center,x_center = cube.wcs.sky2pix((dec_center,ra_center),nearest=True)[0]
 # Extract the central spectrum
@@ -103,9 +105,9 @@ observed_FWHM = [2.943685832664074, 4.893285634910402, 5.335917188248487, 3.1565
 ## Repository Structure
 
 * `execute_binning.ipynb` - A comprehensive Jupyter Notebook example demonstrating the full end-to-end pipeline logic.
-* `Main_binning_code.py` - The core script to configure parameters and execute the pipeline via terminal.
-* `binning_functions.py` - Contains the logic for the iterative "grow-and-lock" spatial loops and the accretion phase.
-* `spectrum_functions.py` - Handles array indexing, masking of NaN values, and fast window-based S/N calculations.
+* `Main_binning_code.py` - Contains the logic for the iterative "grow-and-lock" spatial loops and the accretion phase.
+* `binning_functions.py` - Calculates galactocentric coordinates, bin positions and S/N. 
+* `spectrum_functions.py` - Extract spectra based on window sizes.
 * `input_reading_module.py` - Modules to ingest data cubes, variance arrays, and metadata parameters.
 * `bin_plots.py` - Visualization tools to map and evaluate the final bin configurations.
 * `MHDFS-0003-cube.fits` - Example data cube file provided to test the pipeline out of the box.
@@ -121,3 +123,32 @@ Ensure you have a Python 3 environment active (Conda is highly recommended).
    ```bash
    git clone [https://github.com/yourusername/repo-name.git](https://github.com/yourusername/repo-name.git)
    cd repo-name
+    ```
+2. Install the required dependencies (including MPDAF):
+   ```
+   pip install -r requirements.txt
+   ```
+## Usage & Quick Start Example
+To get started immediately, we have provided an example notebook (execute_binning.ipynb) using the `MHDFS-0003-cube.fits` dataset. 
+
+Launch Jupyter and open `execute_binning.ipynb`. The notebook is entirely self-contained and pre-configured with the precise central coordinates, target lines, observed wavelengths, and FWHM values for the `MHDFS-0003` galaxy.
+
+Running this notebook directly showcases how the code dynamically operates with or without an active `pyplatefit` installation.
+
+### Generated Outputs
+Upon successful completion, the pipeline outputs:
+* `binmap.png` - A spatial plot visualizing the generated bin network.
+* `bin_spaxel_map.txt` - The final mapping of Bin IDs to spaxel coordinates. Each row contains the Bin ID followed by a bracketed list of [x,y] spaxel coordinates belonging to that bin (e.g., 10 [13,12],[13,13],[14,12]). Bins explicitly assigned as unbinned/rejected (-1) are automatically omitted.
+
+### License & Attribution
+This project is licensed under the MIT License - see the `LICENSE` file for details.
+If you use this code, please cite the Zenodo archive DOI associated with this repository as well as the primary journal reference:
+```Code snippet
+  @ARTICLE{Chougule2026,
+         author = {{Chougule}, Abhishek and et al.},
+          title = "{Your Paper Title Here}",
+        journal = {A&A},
+           year = 2026,
+           note = {Code available via Zenodo: [https://doi.org/10.5281/zenodo.XXXXXXX](https://doi.org/10.5281/zenodo.XXXXXXX)}
+  }
+```
