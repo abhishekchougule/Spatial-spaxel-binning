@@ -105,7 +105,7 @@ observed_FWHM = [2.943685832664074, 4.893285634910402, 5.335917188248487, 3.1565
 ## Repository Structure
 
 * `execute_binning.ipynb` - A comprehensive Jupyter Notebook example demonstrating the full end-to-end pipeline logic.
-* `Main_binning_code.py` - Contains the logic for the iterative "grow-and-lock" spatial loops and the accretion phase.
+* `Main_binning_loop.py` - Contains the logic for the iterative "grow-and-lock" spatial loops and the accretion phase.
 * `binning_functions.py` - Calculates galactocentric coordinates, bin positions and S/N. 
 * `spectrum_functions.py` - Extract and fit central and global spectra to get required line info. Extract spectra based on window sizes.
 * `bin_plots.py` - Visualization tools to map and evaluate the final bin configurations.
